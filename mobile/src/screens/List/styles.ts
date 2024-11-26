@@ -1,4 +1,4 @@
-import { styled } from 'styled-components/native';
+import { styled } from "styled-components/native";
 
 export const Wrapper = styled.View`
   flex: 1;
@@ -13,7 +13,7 @@ export const Container = styled.View`
   width: 100%;
   padding: 16px;
   gap: 16px;
-  background-color: ${({theme})=>theme.COLORS.WHITE};
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
 export const ListContainer = styled.View`
@@ -24,9 +24,8 @@ export const ListContainer = styled.View`
 `;
 
 export const TextVagas = styled.Text`
-  font-size: ${({theme})=>theme.FONT_SIZE.SM}px;
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   font-weight: 700;
   text-align: center;
-  color: ${({theme})=>theme.COLORS.BLACK};
+  color: ${({ theme }) => theme.COLORS.BLACK};
 `;
-

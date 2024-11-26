@@ -1,8 +1,10 @@
-import { styled } from 'styled-components/native';
+import { styled } from "styled-components/native";
 
-export const Container = styled.TouchableOpacity`
-  background-color: ${({theme})=>theme.COLORS.WHITE};
-  border: 1px solid ${({theme})=>theme.COLORS.GRAY_02};
+export const Container = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.4,
+})`
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  border: 1px solid ${({ theme }) => theme.COLORS.GRAY_02};
   align-items: left;
   gap: 4px;
   width: 100%;
@@ -26,7 +28,7 @@ export const Title = styled.Text`
   font-weight: bold;
   line-height: 16px;
   text-align: left;
-  color: ${({theme})=>theme.COLORS.BLUE};
+  color: ${({ theme }) => theme.COLORS.BLUE};
 `;
 
 export const Data = styled.Text`
@@ -34,7 +36,7 @@ export const Data = styled.Text`
   font-weight: normal;
   line-height: 16px;
   text-align: left;
-  color: ${({theme})=>theme.COLORS.BLACK};
+  color: ${({ theme }) => theme.COLORS.BLACK};
 `;
 
 export const Company = styled.Text`
@@ -42,13 +44,10 @@ export const Company = styled.Text`
   font-weight: bold;
   line-height: 16px;
   text-align: left;
-  color: ${({theme})=>theme.COLORS.BLACK};
+  color: ${({ theme }) => theme.COLORS.BLACK};
 `;
 
 export const OpenButton = styled.View`
-    border-radius: 0 16px 16px 0;
-    padding: 0 16px;
-    background-color: ${({theme})=>theme.COLORS.GRAY_01};
-    justify-content: center;
-    height: 100%;
+  padding: 0 16px;
+  justify-content: center;
 `;

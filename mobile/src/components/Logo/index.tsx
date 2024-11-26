@@ -1,7 +1,5 @@
-import { TextLogo } from './styles';
+import { TextLogo } from "./styles";
 
 export default function Logo() {
-    return (
-        <TextLogo>VagaCerta</TextLogo>
-    );
+  return <TextLogo>VagaCerta</TextLogo>;
 }

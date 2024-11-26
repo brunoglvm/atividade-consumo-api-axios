@@ -5,7 +5,9 @@ type ButtonProps = {
   $noSpacing?: boolean;
 };
 
-export const Container = styled.TouchableOpacity<ButtonProps>`
+export const Container = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})<ButtonProps>`
   width: ${({ $noSpacing }) => ($noSpacing ? "max-content" : "100%")};
   height: ${({ $noSpacing }) => ($noSpacing ? "46px" : "max-content")};
   padding: ${({ $noSpacing }) => ($noSpacing ? "0px 16px" : "16px")};
@@ -24,5 +26,6 @@ export const Title = styled.Text<ButtonProps>`
   font-weight: bold;
   line-height: 16px;
   text-align: left;
-  color: ${({ $variant, theme }) => ($variant === "primary" ? theme.COLORS.WHITE : theme.COLORS.BLUE)};
+  color: ${({ $variant, theme }) =>
+    $variant === "primary" ? theme.COLORS.WHITE : theme.COLORS.BLUE};
 `;
