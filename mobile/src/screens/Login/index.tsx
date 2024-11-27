@@ -1,4 +1,13 @@
+import { useState } from "react";
 import { Image } from "react-native";
+
+import api from "../../services/api";
+
+import BGTop from "../../assets/BGTop.png";
+import Logo from "../../components/Logo";
+import Input from "../../components/Input";
+import { Button } from "../../components/Button";
+
 import {
   Wrapper,
   Container,
@@ -9,12 +18,27 @@ import {
   TextLinkContainer,
 } from "./styles";
 
-import BGTop from "../../assets/BGTop.png";
-import Logo from "../../components/Logo";
-import Input from "../../components/Input";
-import { Button } from "../../components/Button";
-
 export default function Login({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const res = await api.get("/usuarios");
+      const users = res.data;
+
+      const user = users.find((u) => u.email === email && u.senha === senha);
+
+      if (user) {
+        navigation.navigate("Auth", { screen: "Home" });
+      } else {
+        console.log("Login falhou.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Wrapper>
       <Image source={BGTop} />
@@ -22,13 +46,23 @@ export default function Login({ navigation }) {
       <Container>
         <Form>
           <Logo />
-          <Input label="E-mail" placeholder="Digite seu e-mail" />
-          <Input label="Senha" placeholder="Digite sua senha" />
+          <Input
+            label="E-mail"
+            placeholder="Digite seu e-mail"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Input
+            label="Senha"
+            placeholder="Digite sua senha"
+            value={senha}
+            onChangeText={setSenha}
+          />
           <Button
             title="Entrar"
             noSpacing={true}
             variant="primary"
-            onPress={() => navigation.navigate("Auth", { screen: "Home" })}
+            onPress={handleLogin}
           />
           <TextContainer>
             <TextBlack>Não tem uma conta?</TextBlack>

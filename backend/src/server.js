@@ -4,9 +4,15 @@ const sequelize = require("./config/database");
 const usuariosRoutes = require("./routes/usuarios");
 const vagasRoutes = require("./routes/vagas");
 const { authenticateToken } = require("./middlewares/authenticateToken");
+const cors = require("cors");
+const helmet = require("helmet");
 
 const app = express();
+
+// Middlewares globais
 app.use(bodyParser.json());
+app.use(cors());
+app.use(helmet());
 
 // Sincronizar o banco de dados
 sequelize
@@ -18,11 +24,12 @@ sequelize
     console.error("Unable to synchronize the database:", err);
   });
 
-// Usar as rotas importadas
+// Rotas
 app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/vagas", authenticateToken, vagasRoutes);
 
+// Inicializar o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

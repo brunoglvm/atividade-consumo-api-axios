@@ -1,8 +1,10 @@
-export type TaskProps = {
+export type VagaProps = {
   id: number;
-  title: String;
-  date: String;
-  company: String;
+  title: string;
+  date: string;
+  description: string;
+  phone: string;
+  company: string;
 };
 
 export type RootStackParamList = {
