@@ -14,3 +14,8 @@ export type RootStackParamList = {
   Profile: undefined;
   Details: { id: number };
 };
+
+export type User = {
+  email: string;
+  senha: string;
+};

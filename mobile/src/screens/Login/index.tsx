@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Image } from "react-native";
 
 import api from "../../services/api";
+import { User } from "../../utils/Types";
 
 import BGTop from "../../assets/BGTop.png";
 import Logo from "../../components/Logo";
@@ -25,17 +26,24 @@ export default function Login({ navigation }) {
   const handleLogin = async () => {
     try {
       const res = await api.get("/usuarios");
-      const users = res.data;
+      const usuarios = res.data.usuarios;
 
-      const user = users.find((u) => u.email === email && u.senha === senha);
+      // Verifique se 'usuarios' é um array e se não está vazio
+      if (Array.isArray(usuarios) && usuarios.length > 0) {
+        const user = usuarios.find(
+          (u: User) => u.email === email && u.senha === senha
+        );
 
-      if (user) {
-        navigation.navigate("Auth", { screen: "Home" });
+        if (user) {
+          navigation.navigate("Auth", { screen: "Home" });
+        } else {
+          console.log("Login falhou. Nenhum usuário encontrado.");
+        }
       } else {
-        console.log("Login falhou.");
+        console.log("Nenhum usuário encontrado na resposta da API.");
       }
     } catch (error) {
-      console.log(error);
+      console.log("Erro na requisição:", error);
     }
   };
 

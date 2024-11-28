@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const sequelize = require("./config/database");
 const usuariosRoutes = require("./routes/usuarios");
 const vagasRoutes = require("./routes/vagas");
-const { authenticateToken } = require("./middlewares/authenticateToken");
 const cors = require("cors");
 const helmet = require("helmet");
 
@@ -24,12 +23,11 @@ sequelize
     console.error("Unable to synchronize the database:", err);
   });
 
-// Rotas
+// Usar as rotas importadas
 app.use("/api/usuarios", usuariosRoutes);
-app.use("/api/vagas", authenticateToken, vagasRoutes);
+app.use("/api/vagas", vagasRoutes);
 
-// Inicializar o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
