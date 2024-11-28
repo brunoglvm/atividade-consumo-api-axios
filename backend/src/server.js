@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const sequelize = require("./config/database");
 const usuariosRoutes = require("./routes/usuarios");
 const vagasRoutes = require("./routes/vagas");
@@ -9,7 +8,7 @@ const helmet = require("helmet");
 const app = express();
 
 // Middlewares globais
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 app.use(helmet());
 
