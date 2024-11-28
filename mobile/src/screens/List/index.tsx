@@ -54,7 +54,6 @@ export default function List() {
               ListEmptyComponent={() => (
                 <View>
                   <Text>Você ainda não tem vagas cadastradas.</Text>
-                  <Text>Crie vagas.</Text>
                 </View>
               )}
             />
