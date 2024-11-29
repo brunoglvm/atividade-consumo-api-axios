@@ -1,9 +1,8 @@
-import { useContext } from "react";
+import { useState } from "react";
 import { Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import api from "../../services/api";
-import { AuthContext } from "../../context/AuthContext";
 
 import BGTop from "../../assets/BGTop.png";
 import Logo from "../../components/Logo";
@@ -21,7 +20,8 @@ import {
 } from "./styles";
 
 export default function Login({ navigation }) {
-  const { email, setEmail, senha, setSenha } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
   const handleLogin = async () => {
     try {
@@ -40,7 +40,6 @@ export default function Login({ navigation }) {
         }
       } else {
         console.log("Nenhum usuário encontrado na resposta da API.");
-        console.log("Resposta da API:", response.data);
       }
     } catch (error) {
       console.log("Erro na requisição:", error);

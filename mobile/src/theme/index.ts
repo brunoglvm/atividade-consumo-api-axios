@@ -10,6 +10,7 @@ export default {
   },
   FONT_FAMILY: {
     REGULAR: "Roboto_400Regular",
+    MEDIUM: "Roboto_500Medium",
     BOLD: "Roboto_700Bold",
   },
   FONT_SIZE: {

@@ -1,4 +1,5 @@
 import { styled } from "styled-components/native";
+import theme from "../../theme";
 
 export const Container = styled.TouchableOpacity.attrs({
   activeOpacity: 0.4,
@@ -24,24 +25,24 @@ export const Content = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
+  font-family: ${theme.FONT_FAMILY.BOLD};
+  font-size: ${theme.FONT_SIZE.SM};
   line-height: 16px;
   text-align: left;
   color: ${({ theme }) => theme.COLORS.BLUE};
 `;
 
 export const Data = styled.Text`
-  font-size: 14px;
-  font-weight: normal;
+  font-family: ${theme.FONT_FAMILY.REGULAR};
+  font-size: ${theme.FONT_SIZE.SM};
   line-height: 16px;
   text-align: left;
   color: ${({ theme }) => theme.COLORS.BLACK};
 `;
 
 export const Company = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
+  font-family: ${theme.FONT_FAMILY.BOLD};
+  font-size: ${theme.FONT_SIZE.SM};
   line-height: 16px;
   text-align: left;
   color: ${({ theme }) => theme.COLORS.BLACK};

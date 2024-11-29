@@ -1,9 +1,17 @@
 import { ThemeProvider } from "styled-components";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
+import {
+  useFonts,
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Toast from "react-native-toast-message";
 
 import theme from "./src/theme";
 import { AuthProvider } from "./src/context/AuthContext";
@@ -13,6 +21,7 @@ import FormScreen from "./src/screens/Form";
 import List from "./src/screens/List";
 import Profile from "./src/screens/Profile";
 import Details from "./src/screens/Details";
+import { Loading } from "./src/components/Loading";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -59,6 +68,16 @@ function Auth() {
 }
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return <Loading />;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style="auto" />
@@ -72,6 +91,7 @@ export default function App() {
             <Stack.Screen name="FormScreen" component={FormScreen} />
             <Stack.Screen name="Auth" component={Auth} />
           </Stack.Navigator>
+          <Toast />
         </NavigationContainer>
       </AuthProvider>
     </ThemeProvider>
