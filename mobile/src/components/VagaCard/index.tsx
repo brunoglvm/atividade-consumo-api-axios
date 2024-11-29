@@ -4,7 +4,7 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Container, Content, OpenButton, Title, Data, Company } from "./styles";
 import { Feather } from "@expo/vector-icons";
 
-import { RootStackParamList } from "../../utils/Types";
+import { RootStackParamList } from "../../utils/types";
 
 interface Data {
   id: number;

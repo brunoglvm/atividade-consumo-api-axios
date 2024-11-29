@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import theme from "./src/theme";
+import { AuthProvider } from "./src/context/AuthContext";
 
 import Login from "./src/screens/Login";
 import FormScreen from "./src/screens/Form";
@@ -38,9 +39,6 @@ function Auth() {
         tabBarStyle: {
           backgroundColor: theme.COLORS.GRAY_01,
         },
-        tabBarLabelStyle: {
-          fontWeight: 800,
-        },
       })}
     >
       <Tab.Screen name="Home" options={{ tabBarLabel: () => null }}>
@@ -64,16 +62,18 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="FormScreen" component={FormScreen} />
-          <Stack.Screen name="Auth" component={Auth} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Login"
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="FormScreen" component={FormScreen} />
+            <Stack.Screen name="Auth" component={Auth} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

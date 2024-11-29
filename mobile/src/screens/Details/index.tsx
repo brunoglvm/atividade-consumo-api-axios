@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Feather } from "@expo/vector-icons";
 
 import api from "../../services/api";
-import { VagaProps } from "../../utils/Types";
+import { VagaProps } from "../../utils/types";
 
 import Logo from "../../components/Logo";
 import { Button } from "../../components/Button";
