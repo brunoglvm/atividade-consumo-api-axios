@@ -26,7 +26,7 @@ export const Content = styled.View`
 
 export const Title = styled.Text`
   font-family: ${theme.FONT_FAMILY.BOLD};
-  font-size: ${theme.FONT_SIZE.SM};
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   line-height: 16px;
   text-align: left;
   color: ${({ theme }) => theme.COLORS.BLUE};
@@ -34,7 +34,7 @@ export const Title = styled.Text`
 
 export const Data = styled.Text`
   font-family: ${theme.FONT_FAMILY.REGULAR};
-  font-size: ${theme.FONT_SIZE.SM};
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   line-height: 16px;
   text-align: left;
   color: ${({ theme }) => theme.COLORS.BLACK};
@@ -42,7 +42,7 @@ export const Data = styled.Text`
 
 export const Company = styled.Text`
   font-family: ${theme.FONT_FAMILY.BOLD};
-  font-size: ${theme.FONT_SIZE.SM};
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   line-height: 16px;
   text-align: left;
   color: ${({ theme }) => theme.COLORS.BLACK};

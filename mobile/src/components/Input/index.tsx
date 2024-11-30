@@ -1,11 +1,24 @@
+import { useState } from "react";
 import { TextInputProps } from "react-native";
-import { Container, Label, Field } from "./styles";
+import { Ionicons } from "@expo/vector-icons";
+
+import {
+  Container,
+  Label,
+  InputContainer,
+  Field,
+  IconContainer,
+} from "./styles";
+
+import theme from "../../theme";
 
 interface FieldProps extends TextInputProps {
   label: string;
   placeholder?: string;
   name?: string;
+  secureTextEntry?: boolean;
   error?: string;
+  children?: React.ReactNode;
 }
 
 export default function Input({
@@ -13,17 +26,38 @@ export default function Input({
   placeholder,
   name,
   error,
+  secureTextEntry = false,
+  children,
   ...rest
 }: FieldProps) {
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible((prevVal) => !prevVal);
+  };
+
   return (
     <Container>
       <Label>{label}</Label>
-      <Field
-        placeholder={placeholder}
-        value={name}
-        placeholderTextColor={"#2D767F"}
-        {...rest}
-      />
+      <InputContainer>
+        <Field
+          placeholder={placeholder}
+          value={name}
+          placeholderTextColor={theme.COLORS.GREEN}
+          secureTextEntry={secureTextEntry && !isPasswordVisible}
+          {...rest}
+        />
+        {secureTextEntry && (
+          <IconContainer>
+            <Ionicons
+              name={isPasswordVisible ? "eye" : "eye-off"}
+              size={24}
+              color={theme.COLORS.GREEN}
+              onPress={togglePasswordVisibility}
+            />
+          </IconContainer>
+        )}
+      </InputContainer>
     </Container>
   );
 }

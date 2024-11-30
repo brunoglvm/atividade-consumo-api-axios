@@ -68,7 +68,9 @@ export default function Login({ navigation }) {
               placeholder="Digite sua senha"
               value={senha}
               onChangeText={setSenha}
+              secureTextEntry={true}
             />
+
             <Button
               title="Entrar"
               noSpacing={true}

@@ -77,7 +77,9 @@ export default function FormScreen({ navigation }) {
               placeholder="Digite sua senha"
               value={senha}
               onChangeText={setSenha}
+              secureTextEntry={true}
             />
+
             <Button
               title="Entrar"
               noSpacing={true}
