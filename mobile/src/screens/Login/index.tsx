@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from "@react-native-async-storage/async-storage"; //puxei o AsyncStorage
 
 import api from "../../services/api";
 
@@ -35,6 +36,8 @@ export default function Login({ navigation }) {
 
         if (user) {
           navigation.navigate("Auth", { screen: "Home" });
+
+          await AsyncStorage.setItem("user", JSON.stringify(user)); //salvei o user
         } else {
           console.log("Login falhou. Nenhum usuário encontrado.");
         }
