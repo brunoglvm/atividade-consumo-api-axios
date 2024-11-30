@@ -14,7 +14,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Toast from "react-native-toast-message";
 import { useEffect, useState } from "react";
 
-
 import theme from "./src/theme";
 import { AuthProvider } from "./src/context/AuthContext";
 
@@ -87,9 +86,6 @@ export default function App() {
     checkUser();
   }, []);
 
-  if (user) {
-    }
-
   if (!fontsLoaded) {
     return <Loading />;
   }
@@ -100,7 +96,7 @@ export default function App() {
       <AuthProvider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName= {user? "Auth" : "Login"} //condição para verificar se o user existe
+            initialRouteName={user ? "Auth" : "Login"} //condição para verificar se o user existe
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen name="Login" component={Login} />
