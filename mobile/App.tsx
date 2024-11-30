@@ -7,11 +7,13 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-
+import AsyncStorage from "@react-native-async-storage/async-storage"; //puxei o AsyncStorage
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Toast from "react-native-toast-message";
+import { useEffect, useState } from "react";
+
 
 import theme from "./src/theme";
 import { AuthProvider } from "./src/context/AuthContext";
@@ -73,6 +75,20 @@ export default function App() {
     Roboto_500Medium,
     Roboto_700Bold,
   });
+  const [user, setUser] = useState(null); //useState para armazenar o user
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await AsyncStorage.getItem("user");
+      if (user) {
+        setUser(JSON.parse(user));
+      }
+    };
+    checkUser();
+  }, []);
+
+  if (user) {
+    }
 
   if (!fontsLoaded) {
     return <Loading />;
@@ -84,7 +100,7 @@ export default function App() {
       <AuthProvider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName= {user? "Auth" : "Login"} //condição para verificar se o user existe
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen name="Login" component={Login} />
