@@ -1,4 +1,4 @@
-import { styled } from "styled-components/native";
+import styled from "styled-components/native";
 import theme from "../../theme";
 
 export const Container = styled.TouchableOpacity.attrs({
@@ -55,23 +55,44 @@ export const OpenButton = styled.View`
 
 // Skeleton
 
+export const SkeletonContainer = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.4,
+})`
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
+  border: 1px solid ${({ theme }) => theme.COLORS.GRAY_02};
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 100px;
+  border-radius: 16px;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 16px;
+`;
+
+export const SkeletonContent = styled.View`
+  flex: 1;
+  gap: 8px;
+`;
+
 export const SkeletonTitle = styled.View`
-  width: 60%;
+  width: 80%;
   height: 16px;
-  background-color: ${theme.COLORS.GRAY_02};
+  background-color: #969696;
   border-radius: 4px;
 `;
 
 export const SkeletonData = styled.View`
   width: 40%;
   height: 16px;
-  background-color: ${theme.COLORS.GRAY_02};
+  background-color: #b2b2b2;
   border-radius: 4px;
 `;
 
 export const SkeletonCompany = styled.View`
-  width: 50%;
+  width: 60%;
   height: 16px;
-  background-color: ${theme.COLORS.GRAY_02};
+  background-color: #cccccc;
   border-radius: 4px;
 `;

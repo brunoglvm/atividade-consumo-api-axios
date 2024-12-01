@@ -12,6 +12,8 @@ import {
   Title,
   Data,
   Company,
+  SkeletonContainer,
+  SkeletonContent,
   SkeletonTitle,
   SkeletonData,
   SkeletonCompany,
@@ -33,7 +35,16 @@ export function VagaCard({ id, title, dataCreated, company }: Data) {
     <Container onPress={() => navigation.navigate("Details", { id })}>
       <Content>
         <Title numberOfLines={1}>{title}</Title>
-        <Data>{dataCreated}</Data>
+
+        <Data>
+          {/* Formatação da data */}
+          {new Date(dataCreated).toLocaleDateString("pt-BR", {
+            timeZone: "UTC",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })}
+        </Data>
         <Company numberOfLines={1}>{company}</Company>
       </Content>
       <OpenButton>
@@ -45,13 +56,13 @@ export function VagaCard({ id, title, dataCreated, company }: Data) {
 
 export function SkeletonVagaCard() {
   return (
-    <Container>
-      <Content>
+    <SkeletonContainer>
+      <SkeletonContent>
         <SkeletonTitle />
         <SkeletonData />
         <SkeletonCompany />
-      </Content>
-      <OpenButton></OpenButton>
-    </Container>
+      </SkeletonContent>
+      <Feather name="chevron-right" size={24} color={theme.COLORS.BLUE} />
+    </SkeletonContainer>
   );
 }
