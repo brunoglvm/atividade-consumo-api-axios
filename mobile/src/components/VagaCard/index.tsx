@@ -1,5 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Feather } from "@expo/vector-icons";
+
+import theme from "../../theme";
+import { RootStackParamList } from "../../utils/types";
 
 import {
   Container,
@@ -12,17 +16,13 @@ import {
   SkeletonData,
   SkeletonCompany,
 } from "./styles";
-import { Feather } from "@expo/vector-icons";
 
-import { RootStackParamList } from "../../utils/types";
-import { View } from "react-native";
-
-interface Data {
+type Data = {
   id: number;
   title: string;
   dataCreated: string;
   company: string;
-}
+};
 
 type Props = NativeStackScreenProps<RootStackParamList>;
 
@@ -37,7 +37,7 @@ export function VagaCard({ id, title, dataCreated, company }: Data) {
         <Company numberOfLines={1}>{company}</Company>
       </Content>
       <OpenButton>
-        <Feather name="chevron-right" size={24} color={"#3D6CB9"} />
+        <Feather name="chevron-right" size={24} color={theme.COLORS.BLUE} />
       </OpenButton>
     </Container>
   );

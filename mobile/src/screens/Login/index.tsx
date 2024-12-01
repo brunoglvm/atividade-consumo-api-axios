@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AsyncStorage from "@react-native-async-storage/async-storage"; //puxei o AsyncStorage
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import api from "../../services/api";
+import { AuthContext } from "../../context/AuthContext";
 
 import BGTop from "../../assets/BGTop.png";
 import Logo from "../../components/Logo";
@@ -21,8 +22,7 @@ import {
 } from "./styles";
 
 export default function Login({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const { email, setEmail, senha, setSenha, setNome } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
@@ -35,9 +35,9 @@ export default function Login({ navigation }) {
         );
 
         if (user) {
+          await AsyncStorage.setItem("user", JSON.stringify(user));
+          setNome(user.nome); // Atualiza o contexto com o nome do usuário
           navigation.navigate("Auth", { screen: "Home" });
-
-          await AsyncStorage.setItem("user", JSON.stringify(user)); //salvei o user
         } else {
           console.log("Login falhou. Nenhum usuário encontrado.");
         }
