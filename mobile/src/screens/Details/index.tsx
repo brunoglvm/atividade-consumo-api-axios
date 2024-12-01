@@ -28,7 +28,7 @@ export default function Details({ route, navigation }) {
   const fetchVaga = async () => {
     try {
       const res = await api.get(`vagas/${id}`);
-      const data = res.data;
+      const data = res.data.job;
       setVaga({
         id: data.id,
         title: data.titulo,

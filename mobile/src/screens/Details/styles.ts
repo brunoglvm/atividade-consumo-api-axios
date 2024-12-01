@@ -61,5 +61,5 @@ export const Description = styled.Text`
   font-family: ${theme.FONT_FAMILY.REGULAR};
   font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   text-align: left;
-  color: ${({ theme }) => theme.COLORS.BLACK};
+  color: ${({ theme }) => theme.COLORS.GRAY_03};
 `;
