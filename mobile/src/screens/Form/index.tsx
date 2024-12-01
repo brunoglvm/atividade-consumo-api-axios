@@ -81,7 +81,7 @@ export default function FormScreen({ navigation }) {
             />
 
             <Button
-              title="Entrar"
+              title="Criar conta"
               noSpacing={true}
               variant="primary"
               onPress={handleRegister}
