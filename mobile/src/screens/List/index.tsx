@@ -24,7 +24,7 @@ export default function List() {
     const fetchVagas = async () => {
       try {
         const res = await api.get("/vagas");
-        setVagas(res.data);
+        setVagas(res.data.jobs);
       } catch (error) {
         console.log(error);
       } finally {
