@@ -5,7 +5,7 @@ import Toast from "react-native-toast-message";
 
 import api from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
-import { User } from "../../utils/types";
+import { User } from "../../utils/Types";
 
 import Logo from "../../components/Logo";
 import Input from "../../components/Input";
