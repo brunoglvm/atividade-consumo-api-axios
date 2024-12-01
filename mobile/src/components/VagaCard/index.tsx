@@ -3,7 +3,7 @@ import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Feather } from "@expo/vector-icons";
 
 import theme from "../../theme";
-import { RootStackParamList } from "../../utils/types";
+import { RootStackParamList } from "../../utils/Types";
 
 import {
   Container,
