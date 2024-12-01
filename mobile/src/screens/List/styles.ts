@@ -30,3 +30,10 @@ export const TextVagas = styled.Text`
   text-align: center;
   color: ${({ theme }) => theme.COLORS.BLACK};
 `;
+
+export const TextListaVazia = styled.Text`
+  font-family: ${theme.FONT_FAMILY.REGULAR};
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
+  text-align: center;
+  color: ${({ theme }) => theme.COLORS.GRAY_03};
+`;

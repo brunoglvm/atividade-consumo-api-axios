@@ -74,6 +74,7 @@ export default function App() {
     Roboto_500Medium,
     Roboto_700Bold,
   });
+
   const [user, setUser] = useState(null); //useState para armazenar o user
 
   useEffect(() => {

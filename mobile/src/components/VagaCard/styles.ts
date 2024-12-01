@@ -52,3 +52,26 @@ export const OpenButton = styled.View`
   padding: 0 16px;
   justify-content: center;
 `;
+
+// Skeleton
+
+export const SkeletonTitle = styled.View`
+  width: 60%;
+  height: 16px;
+  background-color: ${theme.COLORS.GRAY_02};
+  border-radius: 4px;
+`;
+
+export const SkeletonData = styled.View`
+  width: 40%;
+  height: 16px;
+  background-color: ${theme.COLORS.GRAY_02};
+  border-radius: 4px;
+`;
+
+export const SkeletonCompany = styled.View`
+  width: 50%;
+  height: 16px;
+  background-color: ${theme.COLORS.GRAY_02};
+  border-radius: 4px;
+`;
