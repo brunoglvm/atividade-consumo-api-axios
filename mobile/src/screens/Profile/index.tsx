@@ -23,31 +23,56 @@ export default function Profile({ navigation }) {
     useContext(AuthContext);
 
   const updateProfile = async ({ nome, email, senha }: User): Promise<void> => {
+    if (!nome || !email || !senha) {
+      // Verifica se os campos obrigatórios estão vazios
+      console.log(
+        "Falha ao atualizar perfil. Todos os campos são obrigatórios."
+      );
+      Toast.show({
+        type: "error",
+        text1: "Falha ao atualizar perfil.",
+        text2: "Todos os campos são obrigatórios.",
+      });
+      return;
+    }
+
     try {
       const user = await AsyncStorage.getItem("user");
       const parsedUser = JSON.parse(user);
+
       const response = await api.put(`/usuarios/${parsedUser.id}`, {
         nome,
         email,
         senha,
       });
+
       await AsyncStorage.setItem("user", JSON.stringify(response.data.user));
+
+      // Atualização bem-sucedida
+      console.log("Perfil atualizado com sucesso.");
       Toast.show({
         type: "success",
         text1: "Perfil atualizado com sucesso!",
+        text2: "Suas informações foram salvas com sucesso.",
       });
     } catch (error) {
+      // Erro ao tentar atualizar o perfil
       console.log("Erro ao atualizar o perfil:", error);
       Toast.show({
         type: "error",
         text1: "Erro ao atualizar o perfil.",
+        text2:
+          "Houve um problema ao tentar atualizar seu perfil. Tente novamente.",
       });
     }
   };
 
   const handleLogout = async () => {
     await logout(); // Executa a lógica de logout do contexto
-    navigation.navigate("Login"); // Leva para a tela de login
+    navigation.reset({
+      index: 0,
+      routes: [{ name: "Login" }],
+    }); // Leva para a tela de login deletando a pilha de navegação
   };
 
   return (
