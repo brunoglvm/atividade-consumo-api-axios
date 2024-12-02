@@ -105,15 +105,15 @@ yarn start
 
 Página Cadastro             |  Página de Login
 :-------------------------:|:-------------------------:
-![Cadastro Usuário]()   |  ![Login]()
+![Cadastro Usuário](.github/preview1.jpg)   |  ![Login](.github/preview2.jpg)
 
 Página de Edição de Usuário |  Página de Vagas 
 :-------------------------:|:-------------------------:
-![Página de Edição de Usuário]()   |  ![Página de Vagas]()
+![Página de Edição de Usuário](.github/preview3.jpg)   |  ![Página de Vagas](.github/preview4.jpg)
 
 Página de Vaga Específica 
 :-------------------------:|
-![Página de Vaga Específica]()  | 
+<img src=".github/preview5.jpg" alt="Página de Vaga Específica" width="485"/> | 
 ## 👩🏽‍💻 Desenvolvedores
 
 | <img src="https://avatars.githubusercontent.com/brunoglvm" alt="Bruno Galvão" width="100" height="100"> <br> [Bruno Galvão](https://github.com/brunoglvm) | <img src="https://avatars.githubusercontent.com/munizds" alt="Cleiton Muniz" width="100" height="100"> <br> [Cleiton Muniz](https://github.com/munizds) | <img src="https://avatars.githubusercontent.com/teixeira-g" alt="Gabriel Teixeira" width="100" height="100"> <br> [Gabriel Teixeira](https://github.com/teixeira-g) |  <img src="https://avatars.githubusercontent.com/jmarcelobc" alt="João Marcelo" width="100" height="100"> <br> [João Marcelo](https://github.com/jmarcelobc) |  <img src="https://avatars.githubusercontent.com/Herlusz" alt="Herlon Silva" width="100" height="100"> <br> [Herlon Silva](https://github.com/Herlusz) | <img src="https://avatars.githubusercontent.com/udimile" alt="Udimile Macedo" width="100" height="100"> <br> [Udimile Macedo](https://github.com/udimile) |
