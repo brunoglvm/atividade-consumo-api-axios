@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Feather } from "@expo/vector-icons";
+import { Linking, Alert } from "react-native";
 
 import api from "../../services/api";
 import { VagaProps } from "../../utils/Types";
@@ -46,6 +47,16 @@ export default function Details({ route, navigation }) {
     fetchVaga();
   }, [id]);
 
+  const handleContact = () => {
+    if (vaga && vaga.phone){
+      const phoneNumber = vaga.phone.replace(/\D/g, ""); //Remove caracteres que não são numero
+      const url = `https://wa.me/${phoneNumber}`;
+      Linking.openURL(url).catch(() => {
+        Alert.alert("Erro", "Não foi possível abrir o WhatsApp.")
+      });
+    }
+  };
+
   return (
     <Wrapper>
       <Header>
@@ -69,6 +80,7 @@ export default function Details({ route, navigation }) {
             title="Entrar em contato"
             noSpacing={true}
             variant="primary"
+            onPress={handleContact}
           />
         </Container>
       ) : (
