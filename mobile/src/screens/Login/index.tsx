@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Image } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
 import api from "../../services/api";
 import { AuthContext } from "../../context/AuthContext";
