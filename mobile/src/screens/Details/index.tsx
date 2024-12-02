@@ -36,6 +36,7 @@ export default function Details({ route, navigation }) {
         date: data.dataCadastro,
         description: data.descricao,
         phone: data.telefone,
+        status: data.status,
         company: data.empresa,
       });
     } catch (error) {
@@ -48,11 +49,11 @@ export default function Details({ route, navigation }) {
   }, [id]);
 
   const handleContact = () => {
-    if (vaga && vaga.phone){
+    if (vaga && vaga.phone) {
       const phoneNumber = vaga.phone.replace(/\D/g, ""); //Remove caracteres que não são numero
       const url = `https://wa.me/${phoneNumber}`;
       Linking.openURL(url).catch(() => {
-        Alert.alert("Erro", "Não foi possível abrir o WhatsApp.")
+        Alert.alert("Erro", "Não foi possível abrir o WhatsApp.");
       });
     }
   };
@@ -76,12 +77,20 @@ export default function Details({ route, navigation }) {
             <Description>{vaga.description}</Description>
           </ContentContainer>
 
-          <Button
-            title="Entrar em contato"
-            noSpacing={true}
-            variant="primary"
-            onPress={handleContact}
-          />
+          {vaga.status !== "inativo" ? (
+            <Button
+              title="Entrar em contato"
+              noSpacing={true}
+              variant="primary"
+              onPress={handleContact}
+            />
+          ) : (
+            <Button
+              title="Vaga Encerrada"
+              noSpacing={true}
+              variant="secondary"
+            />
+          )}
         </Container>
       ) : (
         <Title>Vaga não foi encontrada.</Title>

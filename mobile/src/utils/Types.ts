@@ -11,6 +11,7 @@ export type VagaProps = {
   date: string;
   description: string;
   phone: string;
+  status: string;
   company: string;
 };
 
