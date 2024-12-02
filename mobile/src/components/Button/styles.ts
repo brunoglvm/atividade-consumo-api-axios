@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import theme from "../../theme";
 
 type ButtonProps = {
   $variant?: "primary" | "secondary";
@@ -22,8 +23,8 @@ export const Container = styled.TouchableOpacity.attrs({
 `;
 
 export const Title = styled.Text<ButtonProps>`
-  font-size: 14px;
-  font-weight: bold;
+  font-family: ${theme.FONT_FAMILY.BOLD};
+  font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
   line-height: 16px;
   text-align: left;
   color: ${({ $variant, theme }) =>

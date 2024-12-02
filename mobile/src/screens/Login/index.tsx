@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Image } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import api from "../../services/api";
-import { User } from "../../utils/Types";
+import { AuthContext } from "../../context/AuthContext";
 
 import BGTop from "../../assets/BGTop.png";
 import Logo from "../../components/Logo";
@@ -20,21 +22,21 @@ import {
 } from "./styles";
 
 export default function Login({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const { email, setEmail, senha, setSenha, setNome } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
-      const res = await api.get("/usuarios");
-      const usuarios = res.data.usuarios;
+      const response = await api.get("/usuarios");
+      const usuarios = response.data.users;
 
-      // Verifique se 'usuarios' é um array e se não está vazio
       if (Array.isArray(usuarios) && usuarios.length > 0) {
         const user = usuarios.find(
-          (u: User) => u.email === email && u.senha === senha
+          (u) => u.email === email && u.senha === senha
         );
 
         if (user) {
+          await AsyncStorage.setItem("user", JSON.stringify(user));
+          setNome(user.nome); // Atualiza o contexto com o nome do usuário
           navigation.navigate("Auth", { screen: "Home" });
         } else {
           console.log("Login falhou. Nenhum usuário encontrado.");
@@ -48,40 +50,47 @@ export default function Login({ navigation }) {
   };
 
   return (
-    <Wrapper>
-      <Image source={BGTop} />
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1 }}
+      showsVerticalScrollIndicator={false}
+    >
+      <Wrapper>
+        <Image source={BGTop} />
 
-      <Container>
-        <Form>
-          <Logo />
-          <Input
-            label="E-mail"
-            placeholder="Digite seu e-mail"
-            value={email}
-            onChangeText={setEmail}
-          />
-          <Input
-            label="Senha"
-            placeholder="Digite sua senha"
-            value={senha}
-            onChangeText={setSenha}
-          />
-          <Button
-            title="Entrar"
-            noSpacing={true}
-            variant="primary"
-            onPress={handleLogin}
-          />
-          <TextContainer>
-            <TextBlack>Não tem uma conta?</TextBlack>
-            <TextLinkContainer
-              onPress={() => navigation.navigate("FormScreen")}
-            >
-              <TextLink>Crie agora mesmo.</TextLink>
-            </TextLinkContainer>
-          </TextContainer>
-        </Form>
-      </Container>
-    </Wrapper>
+        <Container>
+          <Form>
+            <Logo />
+            <Input
+              label="E-mail"
+              placeholder="Digite seu e-mail"
+              value={email}
+              onChangeText={setEmail}
+            />
+            <Input
+              label="Senha"
+              placeholder="Digite sua senha"
+              value={senha}
+              onChangeText={setSenha}
+              secureTextEntry={true}
+            />
+
+            <Button
+              title="Entrar"
+              noSpacing={true}
+              variant="primary"
+              onPress={handleLogin}
+            />
+            <TextContainer>
+              <TextBlack>Não tem uma conta?</TextBlack>
+              <TextLinkContainer
+                onPress={() => navigation.navigate("FormScreen")}
+              >
+                <TextLink>Crie agora mesmo.</TextLink>
+              </TextLinkContainer>
+            </TextContainer>
+          </Form>
+        </Container>
+      </Wrapper>
+    </KeyboardAwareScrollView>
   );
 }

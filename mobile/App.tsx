@@ -1,17 +1,28 @@
 import { ThemeProvider } from "styled-components";
 import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
+import {
+  useFonts,
+  Roboto_400Regular,
+  Roboto_500Medium,
+  Roboto_700Bold,
+} from "@expo-google-fonts/roboto";
+import AsyncStorage from "@react-native-async-storage/async-storage"; //puxei o AsyncStorage
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Toast from "react-native-toast-message";
+import { useEffect, useState } from "react";
 
 import theme from "./src/theme";
+import { AuthProvider } from "./src/context/AuthContext";
 
 import Login from "./src/screens/Login";
 import FormScreen from "./src/screens/Form";
 import List from "./src/screens/List";
 import Profile from "./src/screens/Profile";
 import Details from "./src/screens/Details";
+import { Loading } from "./src/components/Loading";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -38,9 +49,6 @@ function Auth() {
         tabBarStyle: {
           backgroundColor: theme.COLORS.GRAY_01,
         },
-        tabBarLabelStyle: {
-          fontWeight: 800,
-        },
       })}
     >
       <Tab.Screen name="Home" options={{ tabBarLabel: () => null }}>
@@ -61,19 +69,44 @@ function Auth() {
 }
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Roboto_400Regular,
+    Roboto_500Medium,
+    Roboto_700Bold,
+  });
+
+  const [user, setUser] = useState(null); //useState para armazenar o user
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await AsyncStorage.getItem("user");
+      if (user) {
+        setUser(JSON.parse(user));
+      }
+    };
+    checkUser();
+  }, []);
+
+  if (!fontsLoaded) {
+    return <Loading />;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Login"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="FormScreen" component={FormScreen} />
-          <Stack.Screen name="Auth" component={Auth} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <AuthProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName={user ? "Auth" : "Login"} //condição para verificar se o user existe
+            screenOptions={{ headerShown: false }}
+          >
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="FormScreen" component={FormScreen} />
+            <Stack.Screen name="Auth" component={Auth} />
+          </Stack.Navigator>
+          <Toast />
+        </NavigationContainer>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

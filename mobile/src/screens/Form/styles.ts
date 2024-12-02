@@ -1,4 +1,5 @@
 import { styled } from "styled-components/native";
+import theme from "../../theme";
 
 export const Wrapper = styled.View`
   flex: 1;
@@ -29,8 +30,8 @@ export const TextContainer = styled.View`
 `;
 
 export const TextBlack = styled.Text`
+  font-family: ${theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
-  font-weight: 700;
   text-align: center;
   color: ${({ theme }) => theme.COLORS.BLACK};
 `;
@@ -40,8 +41,8 @@ export const TextLinkContainer = styled.TouchableOpacity`
 `;
 
 export const TextLink = styled.Text`
+  font-family: ${theme.FONT_FAMILY.BOLD};
   font-size: ${({ theme }) => theme.FONT_SIZE.SM}px;
-  font-weight: 700;
   text-align: center;
   color: ${({ theme }) => theme.COLORS.BLUE};
 `;

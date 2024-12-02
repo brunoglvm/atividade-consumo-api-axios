@@ -1,3 +1,10 @@
+export type User = {
+  id?: number;
+  nome: string;
+  email: string;
+  senha: string;
+};
+
 export type VagaProps = {
   id: number;
   title: string;
@@ -13,9 +20,4 @@ export type RootStackParamList = {
   Home: undefined;
   Profile: undefined;
   Details: { id: number };
-};
-
-export type User = {
-  email: string;
-  senha: string;
 };

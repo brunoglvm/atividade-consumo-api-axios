@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { Image, FlatList, View, Text } from "react-native";
+import { useState, useEffect } from "react";
+import { Image, FlatList } from "react-native";
 
 import api from "../../services/api";
 
 import BGTop from "../../assets/BGTop.png";
 import Logo from "../../components/Logo";
-import VagaCard from "../../components/VagaCard";
+import { VagaCard, SkeletonVagaCard } from "../../components/VagaCard";
+import SkeletonLoader from "../../components/SkeletonLoader";
 
-import { Wrapper, Container, ListContainer, TextVagas } from "./styles";
+import {
+  Wrapper,
+  Container,
+  ListContainer,
+  TextVagas,
+  TextListaVazia,
+} from "./styles";
 
 export default function List() {
   const [vagas, setVagas] = useState([]);
@@ -17,7 +24,7 @@ export default function List() {
     const fetchVagas = async () => {
       try {
         const res = await api.get("/vagas");
-        setVagas(res.data);
+        setVagas(res.data.jobs);
       } catch (error) {
         console.log(error);
       } finally {
@@ -37,7 +44,9 @@ export default function List() {
         <TextVagas>{vagas.length} vagas encontradas!</TextVagas>
         <ListContainer>
           {isLoading ? (
-            <Text>Carregando...</Text>
+            <>
+              <SkeletonLoader count={5} skeletonComponent={SkeletonVagaCard} />
+            </>
           ) : (
             <FlatList
               data={vagas}
@@ -52,9 +61,9 @@ export default function List() {
               )}
               showsVerticalScrollIndicator={false}
               ListEmptyComponent={() => (
-                <View>
-                  <Text>Você ainda não tem vagas cadastradas.</Text>
-                </View>
+                <TextListaVazia>
+                  Você ainda não tem vagas cadastradas.
+                </TextListaVazia>
               )}
             />
           )}
